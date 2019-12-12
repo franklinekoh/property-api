@@ -36,7 +36,10 @@
         "respect/validation": "^1.1",
         "league/fractal": "^0.17.0",
         "league/container": "2.x",
-        "slim/psr7": "^0.6.0"
+        "slim/psr7": "^0.6.0",
+        "symfony/console": "^5.0",
+        "guzzlehttp/guzzle": "~6.0",
+        "tuupola/cors-middleware": "^1.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.4"
@@ -60,6 +63,7 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env'); \""
         ],
         "start": "php -S localhost:7000 -t public public/index.php",
+        "fetch-data": "php cli.php app:sync-properties",
         "test": "phpunit"
     }
 

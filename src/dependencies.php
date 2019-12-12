@@ -37,6 +37,11 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 
+$container['httpClient'] = function ($c) {
+
+    return new \GuzzleHttp\Client();
+
+};
 
 
 // Request Validator
