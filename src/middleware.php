@@ -3,7 +3,7 @@
 
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Tuupola\Middleware\CorsMiddleware;
+
 
 $app->add(function ($req, $res, $next) {
     $response = $next($req, $res);

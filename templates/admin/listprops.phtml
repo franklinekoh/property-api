@@ -1,0 +1,91 @@
+<div class="data-table-area" >
+    <div class="box-shadow" id="mergeBlock" >
+        <div class="row"  >
+                <div class="data-table-list">
+                    <table id="data-table-basic" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Country</th>
+                            <th>County</th>
+                            <th>Town</th>
+                            <th>description</th>
+                            <th>Address</th>
+                            <th>View Image</th>
+                            <th>Coordinates</th>
+                            <th>Bedrooms</th>
+                            <th>Bathrooms</th>
+                            <th>Price</th>
+                            <th>Property Type</th>
+                            <th>Type</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($data as $datum){
+                            ?>
+
+                            <tr>
+                                <td><?=$datum->country?></td>
+                                <td><?=$datum->county?></td>
+                                <td><?=$datum->town?></td>
+                                <td><?=$datum->description?></td>
+                                <td><?=$datum->address?></td>
+                                <td><a class="btn btn-xs btn-success" data-toggle="modal" onclick="viewImage(this)" data-target="#viewImageModal" data-id="<?=$datum->img_url?>" href="#"><i class="fa fa-eye"></i></a></td>
+                                <td>Latitude: <?=$datum->latitude?> <br> Longitude: <?=$datum->longitude?></td>
+                                <td><?=$datum->num_bedrooms?></td>
+                                <td><?=$datum->num_bathrooms?></td>
+                                <td><?=$datum->price?></td>
+                                <td>
+
+                                </td>
+                                <td><?=$datum->type?></td>
+                                <td><button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button> <button class="btn btn-xs btn-danger" data-id="<?=$datum->uuid?>" onclick="deleteProperty(this)"><i class="fa fa-times"></i></button></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>Country</th>
+                            <th>County</th>
+                            <th>Town</th>
+                            <th>description</th>
+                            <th>Address</th>
+                            <th>View Image</th>
+                            <th>Coordinates</th>
+                            <th>Bedrooms</th>
+                            <th>Bathrooms</th>
+                            <th>Price</th>
+                            <th>Property Type</th>
+                            <th>Type</th>
+                            <th>Actions</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!--View Image Modal-->
+<div class="modal fade " id="viewImageModal">
+    <div class="modal-dialog modal-lg" >
+        <div class="modal-content" >
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12" id="modalImage">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

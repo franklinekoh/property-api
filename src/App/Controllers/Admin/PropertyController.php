@@ -34,6 +34,13 @@ class PropertyController
         $this->renderer = $container->get('renderer');
     }
 
+    /**
+     * Show property list
+     *
+     * @param Request $request
+     * @param Response $response
+     * @return mixed
+     */
     public function show(Request $request, Response $response){
 
         $data = Property::with(['propertyType'])
@@ -42,7 +49,7 @@ class PropertyController
 
         $this->renderer->setLayout('layout.phtml');
 
-        return $this->renderer->render($response, 'listprops.phtml', [
+        return $this->renderer->render($response, 'admin/listprops.phtml', [
             'title' => 'properties',
             'pageName' => 'Property List',
             'data' => $data,
@@ -50,7 +57,37 @@ class PropertyController
 
     }
 
+    /**
+     * Delete property endpoint
+     *
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
     public function delete(Request $request, Response $response){
+
+        $this->validator->validateArray($data = $request->getParams(),
+            [
+                'uuid' => v::notEmpty(),
+            ]);
+
+        if ($this->validator->failed()) {
+            return $response->withJson(['errors' => $this->validator->getErrors()], 422);
+        }
+
+        $deleted = Property::destroy($request->getParam('uuid'));
+
+        if (!$deleted){
+            return $response->withJson([
+                'status' => false,
+                'message' => 'deletion was not successful'
+            ]);
+        }
+
+        return $response->withJson([
+            'status' => true,
+            'message' => 'deletion successful'
+        ]);
 
     }
 }
