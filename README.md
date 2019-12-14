@@ -5,7 +5,7 @@ set of data
 ## Local setup
 
 -   Clone this project in the folder you wish to install in.
--   import the database at the application root folder
+-   import the database at the application root folder. property.sql
 -   Navigate to project root in command line e.g. cd c:/xampp/htdocs/{project}.
 -   `cp` `.env.example` to `.env` and set your environment variables.
 -   Run `Composer Insall` .
