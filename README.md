@@ -1,7 +1,6 @@
 # Property System application
 
-This is a basic application used that syncs data from an external api source, and performs a CRUD operation on this
-set of data
+This is a basic application used for syncing data from an external api source, and performs a CRUD operation on this set of data.
 ## Local setup
 
 -   Clone this project in the folder you wish to install in.
