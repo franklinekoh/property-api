@@ -1,5 +1,36 @@
+<!-- Breadcomb area Start-->
+<div class="breadcomb-area">
+    <div class="">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcomb-list">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="breadcomb-wp">
+
+                                <div class="breadcomb-icon">
+                                    <a href="#" data-toggle="tooltip" data-placement="right" title="Go Back"><i class="fa fa-home"></i></a>
+                                </div>
+                                <div class="breadcomb-ctn" style="margin-top: 12px;">
+                                    <h2>Property List</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
+                            <div class="breadcomb-report">
+                                <button class="btn" data-toggle="modal" data-target="#createPropertyModal">Add Property </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcomb area End-->
+
 <div class="data-table-area" >
-    <div class="box-shadow" id="mergeBlock" >
+    <div class="box-shadow" id="propertyBlock">
         <div class="row"  >
                 <div class="data-table-list">
                     <table id="data-table-basic" class="table table-striped">
@@ -22,25 +53,38 @@
                         </thead>
                         <tbody>
                         <?php
-                        foreach ($data as $datum){
+                        foreach ($properties as $property){
                             ?>
 
                             <tr>
-                                <td><?=$datum->country?></td>
-                                <td><?=$datum->county?></td>
-                                <td><?=$datum->town?></td>
-                                <td><?=$datum->description?></td>
-                                <td><?=$datum->address?></td>
-                                <td><a class="btn btn-xs btn-success" data-toggle="modal" onclick="viewImage(this)" data-target="#viewImageModal" data-id="<?=$datum->img_url?>" href="#"><i class="fa fa-eye"></i></a></td>
-                                <td>Latitude: <?=$datum->latitude?> <br> Longitude: <?=$datum->longitude?></td>
-                                <td><?=$datum->num_bedrooms?></td>
-                                <td><?=$datum->num_bathrooms?></td>
-                                <td><?=$datum->price?></td>
+                                <td><?=$property->country?></td>
+                                <td><?=$property->county?></td>
+                                <td><?=$property->town?></td>
+                                <td><?=$property->description?></td>
+                                <td><?=$property->address?></td>
+                                <td>
+                                    <?php
+                                    if ($property->latitude === null && $property->latitude === null) {
+                                        ?>
+                                        <a class="btn btn-xs btn-success" data-toggle="modal" onclick="viewImage(this)" data-target="#viewImageModal" data-id="<?='http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].'/'.$property->img_url?>" href="#"><i class="fa fa-eye"></i></a>
+                                        <?php
+                                    }else{
+                                        ?>
+                                        <a class="btn btn-xs btn-success" data-toggle="modal" onclick="viewImage(this)" data-target="#viewImageModal" data-id="<?=$property->img_url?>" href="#"><i class="fa fa-eye"></i></a>
+                                    <?php
+                                    }
+                                    ?>
+
+                                </td>
+                                <td>Latitude: <?=$property->latitude?> <br> Longitude: <?=$property->longitude?></td>
+                                <td><?=$property->num_bedrooms?></td>
+                                <td><?=$property->num_bathrooms?></td>
+                                <td><?=$property->price?></td>
                                 <td>
 
                                 </td>
-                                <td><?=$datum->type?></td>
-                                <td><button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button> <button class="btn btn-xs btn-danger" data-id="<?=$datum->uuid?>" onclick="deleteProperty(this)"><i class="fa fa-times"></i></button></td>
+                                <td><?=$property->type?></td>
+                                <td><button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button> <button class="btn btn-xs btn-danger" data-id="<?=$property->uuid?>" onclick="deleteProperty(this)"><i class="fa fa-times"></i></button></td>
                             </tr>
                         <?php
                         }
@@ -82,6 +126,212 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12" id="modalImage">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Create property-->
+<div class="modal fade " id="createPropertyModal">
+    <div class="modal-dialog modal-lg" >
+        <div class="modal-content" >
+            <div class="modal-header">
+                <h3 class="modal-title">Create Property</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12" >
+                        <div class="form-element-list mg-t-30">
+
+                            <div class="col-md-12 col-lg-12 col-sm-12" >
+                                <div class="col-md-6">
+                                <p style="color: red;">All inputs are required</p>
+                            </div>
+                            </div>
+
+                            <form class="form-vertical"
+                                  id="createPropertyForm"
+                                  enctype="multipart/form-data"
+                                  method="POST"
+                                  >
+                                <div class="col-md-12 col-lg-12 col-sm-12" >
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class=" control-label">Country</label>
+                                            <div class=" inputGroupContainer">
+                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span><input id="country" name="country" placeholder="Country" class="form-control" required value="" type="text"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">County</label>
+                                                <div class="inputGroupContainer">
+                                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span><input id="county" name="county" placeholder="County" class="form-control" required value="" type="text"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+
+                                <div class="col-md-12 col-lg-12 col-sm-12" >
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class=" control-label">Town</label>
+                                            <div class=" inputGroupContainer">
+                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span><input id="town" name="town" placeholder="Town" class="form-control" required value="" type="text"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Postcode</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span><input id="postcode" name="postcode" placeholder="Postcode" class="form-control" required value="" type="text"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-lg-12 col-sm-12" >
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class=" control-label">Description</label>
+                                            <div class=" inputGroupContainer">
+                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span><textarea id="description" name="description" placeholder="Description" class="form-control" required="true" value="" type="text"></textarea></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Address</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="address"  name="address" placeholder="Address" class="form-control" required value="" type="text"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12 col-sm-12" >
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class=" control-label">Bedrooms</label>
+                                            <div class=" inputGroupContainer">
+                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                                <select class=" form-control" name="bedrooms" id="bedrooms" required>
+
+                                                </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label ">Bathrooms</label>
+                                            <div class=" inputGroupContainer">
+                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                                    <select class="selectpicker bathrooms form-control" name="bathrooms" id="bathrooms" required>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-lg-12 col-sm-12" >
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class=" control-label">Price</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="price" name="price" placeholder="Price" class="form-control" required value="" type="number"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Property Type</label>
+                                            <div class=" inputGroupContainer">
+                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                                    <select class="selectpicker form-control" name="propertyType" id="propertyType">
+                                                        <?php
+                                                        foreach ($propertyTypes as $propertyType) {
+
+                                                            ?>
+                                                            <option value="<?= $propertyType->id ?>"><?= $propertyType->title ?></option>
+                                                            <?php
+                                                        }
+                                                        ?>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-lg-12 col-sm-12" >
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class=" control-label">Type</label>
+
+                                            <div class="col-md-12">
+                                                <div class="col-md-6 ">
+                                                    <label><input type="radio" name="type"  class="form-control type" required>Sale</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label><input type="radio" name="type"   class="form-control type" required>Rent</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Upload Image</label>
+                                            <div class=" inputGroupContainer">
+                                                <div class="dropzone" id="my-dropzone" name="mainFileUploader">
+                                                    <div class="fallback">
+                                                        <input name="file" type="file" required/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="dropzone-previews"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <button class="btn btn-success" type="submit" id="submit-all"> upload </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Edit property-->
+<div class="modal fade" id="editPropertyModal">
+    <div class="modal-dialog modal-lg" >
+        <div class="modal-content" >
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Property</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12" >
 
                     </div>
                 </div>

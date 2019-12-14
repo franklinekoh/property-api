@@ -14,6 +14,8 @@ $app->group('/api',
 
         $this->group('/administrator', function (){
             $this->delete('/properties', PropertyController::class.':delete')->setName('properties.delete');
+
+            $this->post('/properties', PropertyController::class.':store')->setName('properties.store');
         });
 
 
