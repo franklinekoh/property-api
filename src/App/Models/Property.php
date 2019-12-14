@@ -19,6 +19,7 @@ class Property extends Model
             'property_type_id',
             'county',
             'country',
+            'postcode',
             'town',
             'description',
             'details_url',
@@ -35,7 +36,7 @@ class Property extends Model
             'updated_at'
         ];
 
-        public function propertyType(){
+        public function property_type(){
                 return $this->hasOne(PropertyTypes::class, 'id', 'property_type_id');
         }
 }

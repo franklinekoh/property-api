@@ -16,6 +16,10 @@ $app->group('/api',
             $this->delete('/properties', PropertyController::class.':delete')->setName('properties.delete');
 
             $this->post('/properties', PropertyController::class.':store')->setName('properties.store');
+
+            $this->post('/properties/update', PropertyController::class.':update')->setName('properties.store');
+
+            $this->get('/properties/{uuid}', PropertyController::class.':getPropertyById')->setName('properties.getById');
         });
 
 

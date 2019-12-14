@@ -81,10 +81,11 @@
                                 <td><?=$property->num_bathrooms?></td>
                                 <td><?=$property->price?></td>
                                 <td>
-
+                                    <?=$property->property_type->title?>
                                 </td>
                                 <td><?=$property->type?></td>
-                                <td><button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button> <button class="btn btn-xs btn-danger" data-id="<?=$property->uuid?>" onclick="deleteProperty(this)"><i class="fa fa-times"></i></button></td>
+                                <td><button data-toggle="modal" data-target="#editPropertyModal" data-id="<?=$property->uuid?>" onclick="getPropertyById(this)" class="btn btn-xs btn-warning "><i class="fa fa-edit"></i></button>
+                                    <button class="btn btn-xs btn-danger" data-id="<?=$property->uuid?>" onclick="deleteProperty(this)"><i class="fa fa-times"></i></button></td>
                             </tr>
                         <?php
                         }
@@ -163,8 +164,8 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class=" control-label">Country</label>
-                                            <div class=" inputGroupContainer">
-                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span><input id="country" name="country" placeholder="Country" class="form-control" required value="" type="text"></div>
+                                            <div class="inputGroupContainer">
+                                               <input id="country" name="country" placeholder="Country" class="form-control" required value="" type="text">
                                             </div>
                                         </div>
                                     </div>
@@ -172,7 +173,7 @@
                                             <div class="form-group">
                                                 <label class="control-label">County</label>
                                                 <div class="inputGroupContainer">
-                                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span><input id="county" name="county" placeholder="County" class="form-control" required value="" type="text"></div>
+                                                   <input id="county" name="county" placeholder="County" class="form-control" required value="" type="text">
                                                 </div>
                                             </div>
                                         </div>
@@ -183,7 +184,7 @@
                                         <div class="form-group">
                                             <label class=" control-label">Town</label>
                                             <div class=" inputGroupContainer">
-                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span><input id="town" name="town" placeholder="Town" class="form-control" required value="" type="text"></div>
+                                           <input id="town" name="town" placeholder="Town" class="form-control" required value="" type="text">
                                             </div>
                                         </div>
                                     </div>
@@ -191,7 +192,7 @@
                                         <div class="form-group">
                                             <label class="control-label">Postcode</label>
                                             <div class="inputGroupContainer">
-                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span><input id="postcode" name="postcode" placeholder="Postcode" class="form-control" required value="" type="text"></div>
+                                                <input id="postcode" name="postcode" placeholder="Postcode" class="form-control" required value="" type="text">
                                             </div>
                                         </div>
                                     </div>
@@ -202,7 +203,7 @@
                                         <div class="form-group">
                                             <label class=" control-label">Description</label>
                                             <div class=" inputGroupContainer">
-                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span><textarea id="description" name="description" placeholder="Description" class="form-control" required="true" value="" type="text"></textarea></div>
+                                               <textarea id="description" name="description" placeholder="Description" class="form-control" required="true" value="" type="text"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -210,7 +211,7 @@
                                         <div class="form-group">
                                             <label class="control-label">Address</label>
                                             <div class="inputGroupContainer">
-                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="address"  name="address" placeholder="Address" class="form-control" required value="" type="text"></div>
+                                      <input id="address"  name="address" placeholder="Address" class="form-control" required value="" type="text">
                                             </div>
                                         </div>
                                     </div>
@@ -220,11 +221,9 @@
                                         <div class="form-group">
                                             <label class=" control-label">Bedrooms</label>
                                             <div class=" inputGroupContainer">
-                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
                                                 <select class=" form-control" name="bedrooms" id="bedrooms" required>
 
                                                 </select>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -232,11 +231,9 @@
                                         <div class="form-group">
                                             <label class="control-label ">Bathrooms</label>
                                             <div class=" inputGroupContainer">
-                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
                                                     <select class="selectpicker bathrooms form-control" name="bathrooms" id="bathrooms" required>
 
                                                     </select>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -247,7 +244,7 @@
                                         <div class="form-group">
                                             <label class=" control-label">Price</label>
                                             <div class="inputGroupContainer">
-                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="price" name="price" placeholder="Price" class="form-control" required value="" type="number"></div>
+                                              <input id="price" name="price" placeholder="Price" class="form-control" required value="" type="number">
                                             </div>
                                         </div>
                                     </div>
@@ -255,8 +252,9 @@
                                         <div class="form-group">
                                             <label class="control-label">Property Type</label>
                                             <div class=" inputGroupContainer">
-                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+
                                                     <select class="selectpicker form-control" name="propertyType" id="propertyType">
+                                                        <option value="">Choose type</option>
                                                         <?php
                                                         foreach ($propertyTypes as $propertyType) {
 
@@ -267,7 +265,7 @@
                                                         ?>
 
                                                     </select>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -293,7 +291,7 @@
                                         <div class="form-group">
                                             <label class="control-label">Upload Image</label>
                                             <div class=" inputGroupContainer">
-                                                <div class="dropzone" id="my-dropzone" name="mainFileUploader">
+                                                <div class="dropzone" id="create-dropzone" >
                                                     <div class="fallback">
                                                         <input name="file" type="file" required/>
                                                     </div>
@@ -309,7 +307,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
-                                    <button class="btn btn-success" type="submit" id="submit-all"> upload </button>
+                                    <button class="btn btn-success btn-lg" type="submit" id="submitCreateForm"> Submit </button>
                                 </div>
                             </form>
                         </div>
@@ -322,17 +320,188 @@
 
 
 <!--Edit property-->
-<div class="modal fade" id="editPropertyModal">
+<div class="modal fade " id="editPropertyModal">
     <div class="modal-dialog modal-lg" >
         <div class="modal-content" >
             <div class="modal-header">
-                <h5 class="modal-title">Edit Property</h5>
+                <h3 class="modal-title">Edit Property</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12" >
+                        <div class="form-element-list mg-t-30">
 
+                            <div class="col-md-12 col-lg-12 col-sm-12" >
+                                <div class="col-md-6">
+                                    <p style="color: red;">All inputs are required</p>
+                                </div>
+                            </div>
+
+                            <form class="form-vertical"
+                                  id="editPropertyForm"
+                                  enctype="multipart/form-data"
+                                  method="POST"
+                            >
+                                <div class="col-md-12 col-lg-12 col-sm-12" >
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class=" control-label">Country</label>
+                                            <div class=" inputGroupContainer">
+                                                <input id="countryEdit" name="countryEdit" placeholder="Country" class="form-control" required value="" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">County</label>
+                                            <div class="inputGroupContainer">
+                                                <input id="countyEdit" name="countyEdit" placeholder="County" class="form-control" required value="" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-lg-12 col-sm-12" >
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class=" control-label">Town</label>
+                                            <div class=" inputGroupContainer">
+                                              <input id="townEdit" name="townEdit" placeholder="Town" class="form-control" required value="" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Postcode</label>
+                                            <div class="inputGroupContainer">
+                                             <input id="postcodeEdit" name="postcodeEdit" placeholder="Postcode" class="form-control" required value="" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-lg-12 col-sm-12" >
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class=" control-label">Description</label>
+                                            <div class=" inputGroupContainer">
+                                                <textarea id="descriptionEdit" name="descriptionEdit" placeholder="Description" class="form-control" required="true" value="" type="text"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Address</label>
+                                            <div class="inputGroupContainer">
+                                            <input id="addressEdit"  name="addressEdit" placeholder="Address" class="form-control" required value="" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12 col-sm-12" >
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class=" control-label">Bedrooms</label>
+                                            <div class=" inputGroupContainer">
+
+                                                    <select class="form-control" name="bedroomsEdit" id="bedroomsEdit" required>
+
+                                                    </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label ">Bathrooms</label>
+                                            <div class=" inputGroupContainer">
+
+                                                    <select class="selectpicker bathrooms form-control" name="bathroomsEdit" id="bathroomsEdit" required>
+
+                                                    </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-lg-12 col-sm-12" >
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class=" control-label">Price</label>
+                                            <div class="inputGroupContainer">
+                                              <input id="priceEdit" name="priceEdit" placeholder="Price" class="form-control" required value="" type="number">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Property Type</label>
+                                            <div class=" inputGroupContainer">
+
+                                                    <select class="selectpicker form-control" name="propertyTypeEdit" id="propertyTypeEdit">
+
+
+                                                    </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" value="" id="uuid" name="uuid">
+
+                                <div class="col-md-12 col-lg-12 col-sm-12" >
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class=" control-label">Type</label>
+
+                                            <div class="col-md-12">
+                                                <div class="col-md-6 ">
+                                                    <label><input type="radio" name="typeEdit" id="saleEdit"  class="form-control typeEdit" required>Sale</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label><input type="radio" name="typeEdit" id="rentEdit" class="form-control typeEdit" required>Rent</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class=" control-label">Current Image</label>
+                                            <div id="currentImageBlock">
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Upload Image</label>
+                                            <div class=" inputGroupContainer">
+                                                <div class="dropzone" id="edit-dropzone" >
+                                                    <div class="fallback">
+                                                        <input name="file" type="file"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="dropzone-previews"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <button class="btn btn-success btn-lg" type="submit" id="submitEditForm"> Submit </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
