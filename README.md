@@ -1,42 +1,29 @@
-# Slim Framework 4 Skeleton Application
+# Property System application
 
-[![Coverage Status](https://coveralls.io/repos/github/slimphp/Slim-Skeleton/badge.svg?branch=master)](https://coveralls.io/github/slimphp/Slim-Skeleton?branch=master)
+This is a basic application used that syncs data from an external api source, and performs a CRUD operation on this
+set of data
+## Local setup
 
-Use this skeleton application to quickly setup and start working on a new Slim Framework 4 application. This application uses the latest Slim 4 with Slim PSR-7 implementation and PHP-DI container implementation. It also uses the Monolog logger.
+-   Clone this project in the folder you wish to install in.
+-   import the database at the application root folder
+-   Navigate to project root in command line e.g. cd c:/xampp/htdocs/{project}.
+-   `cp` `.env.example` to `.env` and set your environment variables.
+-   Run `Composer Insall` .
+-   Run `composer start`.
 
-This skeleton application was built for Composer. This makes setting up a new Slim Framework application quick and easy.
 
-## Install the Application
-
-Run this command from the directory in which you want to install your new Slim Framework application.
-
-```bash
-composer create-project slim/slim-skeleton [my-app-name]
-```
-
-Replace `[my-app-name]` with the desired directory name for your new application. You'll want to:
-
-* Point your virtual host document root to your new application's `public/` directory.
-* Ensure `logs/` is web writable.
-
-To run the application in development, you can run these commands 
+##  Running this application
 
 ```bash
-cd [my-app-name]
-composer start
+composer fetch-data or php cli.php app:sync-propertie
 ```
 
-Or you can use `docker-compose` to run the app with `docker`, so you can run these commands:
-```bash
-cd [my-app-name]
-docker-compose up -d
-```
-After that, open `http://localhost:8080` in your browser.
+After that, open `http://localhost:7000` in your browser.
 
-Run this command in the application directory to run the test suite
+###   Given more time, I would have done the following:
 
-```bash
-composer test
-```
-
-That's it! Now go build something cool.
+-   Used redis to catch API responses during data sync for a short time. I believe this would help improve over performance
+-   Paginated the list to reduce load time on the list property page. In my case, I would have used dataTable Ajax requests or simply listed the properties and paginated them using php
+-   Properly worked on edit module. I has not been tested (:
+-   Improved the overall UI/UX.
+-   possibly created a table to keep track of failed syncs
