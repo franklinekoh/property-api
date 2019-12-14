@@ -15,7 +15,7 @@ set of data
 ##  Running this application
 
 ```bash
-composer fetch-data or php cli.php app:sync-propertie
+composer fetch-data or php cli.php app:sync-properties
 ```
 
 After that, open `http://localhost:7000` in your browser.
