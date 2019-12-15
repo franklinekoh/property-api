@@ -41,6 +41,14 @@ class SyncProperties extends Command {
     }
 
 
+    /**
+     * Execute app sync
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 

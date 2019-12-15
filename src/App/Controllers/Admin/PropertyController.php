@@ -152,6 +152,14 @@ class PropertyController
     }
 
 
+    /**
+     * Update property api
+     *
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     * @throws \Exception
+     */
     public  function update(Request $request, Response $response){
 
         $data = $request->getParams();
