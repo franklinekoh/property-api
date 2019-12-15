@@ -14,7 +14,7 @@ This is a basic application used for syncing data from an external api source, a
 ##  Running this application
 
 ```bash
-composer fetch-data or php cli.php app:sync-properties
+composer fetch-data
 ```
 
 After that, open `http://localhost:7000` in your browser.
