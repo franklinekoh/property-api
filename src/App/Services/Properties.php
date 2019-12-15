@@ -31,6 +31,14 @@ class Properties {
     }
 
 
+    /**
+     * Fetches all property
+     *
+     * @param $pageSize
+     * @param $pageNumber
+     * @return \Psr\Http\Message\ResponseInterface|null
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function fetchAll($pageSize, $pageNumber){
 
         $url = getenv('MTC_URL').self::$propertyUrl;

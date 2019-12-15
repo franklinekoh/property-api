@@ -21,9 +21,9 @@ After that, open `http://localhost:7000` in your browser.
 
 ###   Given more time, I would have done the following:
 
--   Used redis to catch API responses during data sync for a short time. I believe this would help improve over performance
 -   Paginated the list to reduce load time on the list property page. In my case, I would have used dataTable Ajax requests or simply listed the properties and paginated them using php
 -   Properly worked on edit module. I has not been tested (:
 -   Improved the overall UI/UX.
 -   possibly created a table to keep track of failed syncs.
 -   Used phinx package to create database migrates and seeders.
+-   worked on dropzone interference with parsley (for form validation)

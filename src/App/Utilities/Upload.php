@@ -8,7 +8,14 @@ use Slim\Http\UploadedFile;
 class Upload
 {
 
-
+    /**
+     * Uploads Image file
+     *
+     * @param UploadedFile $uploadedFile
+     * @param string $directory
+     * @return string
+     * @throws \Exception
+     */
     public function uploadImage(UploadedFile $uploadedFile, $directory = ROOT.'public/uploads/images'){
 
 
