@@ -22,6 +22,8 @@ After that, open `http://localhost:7000` in your browser.
 ###   Given more time, I would have done the following:
 
 -   Paginated the list to reduce load time on the list property page. In my case, I would have used dataTable Ajax requests or simply listed the properties and paginated them using php
+-   Gotten the total number of records used to sync data from the API property `total`, rather than defining a static property, since more 
+data can be added to the endpoint
 -   Properly worked on edit module. I has not been tested (:
 -   Improved the overall UI/UX.
 -   possibly created a table to keep track of failed syncs.
